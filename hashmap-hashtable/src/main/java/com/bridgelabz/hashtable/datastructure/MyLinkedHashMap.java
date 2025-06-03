@@ -40,6 +40,24 @@ public class MyLinkedHashMap<K,V> {
         //add new
         bucket.add(new MyMapNode<>(key, value));
     }
+    //UC3-Implementation
+    public void remove(K key){
+        int index = getBucketIndex(key);
+        LinkedList<MyMapNode<K,V>> bucket = buckets[index];
+        MyMapNode<K,V> nodeToRemove = null;
+        for(MyMapNode<K,V> node : bucket){
+            if(node.getKey().equals(key)){
+                nodeToRemove = node;
+                break;
+            }
+        }
+        if(nodeToRemove != null){
+            bucket.remove(nodeToRemove);
+            System.out.println("Removed: " + key);
+        } else {
+            System.out.println("word not found: " + key);
+        }
+    }
     public void printMap(){
         for(LinkedList<MyMapNode<K,V>> bucket : buckets){
             for(MyMapNode<K,V> node : bucket){
